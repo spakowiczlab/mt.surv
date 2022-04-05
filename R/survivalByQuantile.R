@@ -1,11 +1,17 @@
 #' Title
 #'
-#' @param input.var
-#' @param input.mat
-#' @param surv.dat
-#' @param percentiles
+#' @param input.var a character object specifying which subject survival analysis
+#' is applying to.
+#' @param input.mata data frame containing information about an object to be tested.
+#' The sample order must agree with surv.dat's sample order
+#' @param surv.dat a data frame containing all survival information. The sample
+#' order must agree with input.dat's sample order
+#' @param percentiles a list of numeric values specifying all of the percentiles
+#' to be tested on
 #'
-#' @return
+#' @return The function will generate a data frame containing hazard ratio,
+#' lower bound, upper bound, percentile, cutoff threshold, and p-value. This data
+#' frame can then be manipulated for various plots
 #' @export
 #'
 #' @examples
