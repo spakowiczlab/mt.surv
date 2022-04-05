@@ -1,4 +1,4 @@
-#' Multi-threshold analysis
+#' Title
 #'
 #' @param input.var
 #' @param input.mat
