@@ -10,7 +10,7 @@
 #'
 #' @examples
 make_threshold <- function(ptable.df,taxlev){
-  tmp <- ggplot(tresh[[taxlev]], aes(x=percentile, y=log(pval)))+
+  tmp <- ggplot(ptable.df[[taxlev]], aes(x=percentile, y=log(pval)))+
     geom_line(aes(color = hazard.direction, group=1))+
     geom_hline(yintercept = log(0.05))+
     ylab("log(pval)")+
