@@ -2,7 +2,7 @@
 % Please edit documentation in R/survivalByQuantile.R
 \name{survivalByQuantile}
 \alias{survivalByQuantile}
-\title{Title}
+\title{Compute cox model p-value under various threshold}
 \usage{
 survivalByQuantile(
   input.var,
@@ -30,5 +30,8 @@ lower bound, upper bound, percentile, cutoff threshold, and p-value. This data
 frame can then be manipulated for various plots
 }
 \description{
-Title
+Compute cox model p-value under various threshold
+}
+\details{
+The threshold used in this function is to categorize data into two groups
 }

@@ -1,11 +1,11 @@
-#'
+#' Visulize Threshold vs. p-value
 #'
 #' @param ptable.df output from function survivalByQuantile. It includes information about
 #' survival under various threshold
 #' @param taxlev a character object specifying which subject survival analysis
 #' is applying to.
 #'
-#' @return
+#' @return A ggplot
 #' @export
 #'
 #' @examples

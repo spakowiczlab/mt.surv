@@ -1,4 +1,6 @@
-#' Title
+#' Compute cox model p-value under various threshold
+#'
+#' @details The threshold used in this function is to categorize data into two groups
 #'
 #' @param input.var a character object specifying which subject survival analysis
 #' is applying to.
