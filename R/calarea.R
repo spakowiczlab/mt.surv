@@ -12,8 +12,7 @@
 #'
 #' @examples
 calarea <- function(taxlev,ptable.df, alpha = 0.05){
-  input <- ptable.df[[taxlev]]
-  output <- input %>%
+  output <- ptable.df[[taxlev]]%>%
     dplyr::filter(pval < alpha) %>%
     dplyr::mutate(sig.dif = log(alpha) - log(pval),
            survival.effect = ifelse(hazard.direction == "<1", "positive", "negative")) %>%
