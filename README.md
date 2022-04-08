@@ -29,6 +29,4 @@ devtools::install_github("spakowiczlab/mt.surv")
 
 2. Therneau, T., Grambsch, P., Modeling Survival Data: Extending the Cox Model. Springer-Verlag, 2000.
 
-3. 
-
 _submitted_
