@@ -24,7 +24,6 @@ exoToDF <- function(data,surv,
     tmp.wide[is.na(tmp.wide)] <- 0
     return(tmp.wide)
   }
-  tmp.wide[is.na(tmp.wide)] <- 0
   w.ls <- lapply(taxalevels, function(x) exoRAtowide(data,surv, x))
   names(w.ls) <- taxalevels
 
