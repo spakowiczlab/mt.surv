@@ -4,13 +4,13 @@
 \alias{calarea}
 \title{Calarea}
 \usage{
-calarea(taxlev, ptable.df, alpha = 0.05)
+calarea(taxlev, threshold.mat, alpha = 0.05)
 }
 \arguments{
 \item{taxlev}{a character object specifying which subject survival analysis
 is applying to.}
 
-\item{ptable.df}{output from function survivalByQuantile. It includes information about
+\item{threshold.mat}{output from function survivalByQuantile. It includes information about
 survival under various threshold}
 
 \item{alpha}{a numeric value representing the statistically significant p-value}

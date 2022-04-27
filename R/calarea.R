@@ -3,7 +3,7 @@
 #' indicator for area under the curve
 #' @param taxlev a character object specifying which subject survival analysis
 #' is applying to.
-#' @param ptable.df output from function survivalByQuantile. It includes information about
+#' @param threshold.mat output from function survivalByQuantile. It includes information about
 #' survival under various threshold
 #' @param alpha a numeric value representing the statistically significant p-value
 #'
@@ -11,8 +11,8 @@
 #' @export
 #'
 #' @examples
-calarea <- function(taxlev,ptable.df, alpha = 0.05){
-  output <- ptable.df[[taxlev]]%>%
+calarea <- function(taxlev,threshold.mat, alpha = 0.05){
+  output <- threshold.mat[[taxlev]]%>%
     dplyr::filter(pval < alpha) %>%
     dplyr::mutate(sig.dif = log(alpha) - log(pval),
            survival.effect = ifelse(hazard.direction == "<1", "positive", "negative")) %>%

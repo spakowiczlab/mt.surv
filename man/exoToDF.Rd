@@ -2,25 +2,29 @@
 % Please edit documentation in R/exoToDF.R
 \name{exoToDF}
 \alias{exoToDF}
-\title{change data frame into wide format}
+\title{change data frame into wide format and match survival data}
 \usage{
 exoToDF(
-  data,
-  surv,
+  data.long,
+  surv.dat,
   taxalevels = c("domain", "kingdom", "phylum", "class", "order", "family", "genus",
     "species")
 )
 }
 \arguments{
-\item{data}{input data in long format}
+\item{data.long}{input taxonomy matrix in long format}
 
-\item{surv}{survival information for the data}
+\item{surv.dat}{survival information for the data.long}
 
-\item{taxalevels}{character vector}
+\item{taxalevels}{character vector representing every taxonomy level to be changed into wide format}
 }
 \value{
-
+a long format of the taxonomy data with matching survival information
 }
 \description{
-change data frame into wide format
+change data frame into wide format and match survival data
+}
+\examples{
+
+
 }
