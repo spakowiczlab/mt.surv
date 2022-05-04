@@ -6,7 +6,7 @@
 \usage{
 survivalByQuantile(
   input.var,
-  input.mat,
+  input.tax,
   surv.dat,
   percentiles = seq(0.01, 0.99, 0.01)
 )
@@ -15,14 +15,14 @@ survivalByQuantile(
 \item{input.var}{a character object specifying which subject survival analysis
 is applying to.}
 
+\item{input.tax}{data frame containing information about an object to be tested.
+The sample order must agree with surv.dat's sample order}
+
 \item{surv.dat}{a data frame containing all survival information. The sample
 order must agree with input.dat's sample order}
 
 \item{percentiles}{a list of numeric values specifying all of the percentiles
 to be tested on}
-
-\item{input.mata}{data frame containing information about an object to be tested.
-The sample order must agree with surv.dat's sample order}
 }
 \value{
 The function will generate a data frame containing hazard ratio,

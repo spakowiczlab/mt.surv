@@ -4,7 +4,7 @@
 #'
 #' @param input.var a character object specifying which subject survival analysis
 #' is applying to.
-#' @param input.mata data frame containing information about an object to be tested.
+#' @param input.tax data frame containing information about an object to be tested.
 #' The sample order must agree with surv.dat's sample order
 #' @param surv.dat a data frame containing all survival information. The sample
 #' order must agree with input.dat's sample order
@@ -17,28 +17,29 @@
 #' @export
 #'
 #' @examples
-survivalByQuantile <- function(input.var, input.mat, surv.dat, percentiles = seq(.01,.99,0.01)){
+survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq(.01,.99,0.01)){
 
-  surv.dat$input.var <- input.mat[[input.var]]
-  ptable <- list()
-  for(i in percentiles){
-    cut <- quantile(surv.dat$input.var, i)
+  aa <- function(input.var, input.tax,surv.dat, percent){
+    surv.dat$input.var <- input.tax[[input.var]]
+    cut <- quantile(surv.dat$input.var, percent)
     surv.dat$tmp <- ifelse(surv.dat$input.var < cut, 0, 1)
     ### survival data and Tax data ID has to be the same and in same order (use arrange())
     survtemp <- survival::coxph(survival::Surv(days, vitalstatus) ~ tmp, surv.dat)
     dat_temp <- merge(data.frame(summary(survtemp)[["conf.int"]]),
-                      data.frame(summary(survtemp)[["coefficients"]]))
-    ptable[[as.character(i)]] <- dat_temp %>%
-      dplyr::mutate(hazard.ratio = exp..coef.,
+                      data.frame(summary(survtemp)[["coefficients"]])) %>%
+      mutate(hazard.ratio = exp..coef.,
              low.bound = lower..95,
              upper.bound = upper..95,
              pval = Pr...z..,
-             percentile = i,
+             percentile = percent,
              cutoff.value = cut) %>%
-      dplyr::select(hazard.ratio, low.bound, upper.bound, percentile, cutoff.value, pval) %>%
-      dplyr::mutate(hazard.direction = ifelse(hazard.ratio >= 1, ">=1", "<1"))
+      select(hazard.ratio, low.bound, upper.bound, percentile, cutoff.value, pval) %>%
+      mutate(hazard.direction = ifelse(hazard.ratio >= 1, ">=1", "<1"))
 
+    return(dat_temp)
   }
+
+  ptable <- lapply(percentiles, function(x) aa(input.var, input.tax,surv.dat,x))
   ptable.df <- bind_rows(ptable)
 
   return(ptable.df)
