@@ -16,7 +16,7 @@ exoToDF <- function(data.long,surv.dat,
   exoRAtowide <- function(data.long,surv.dat, taxlev){
     tmp <- data.long %>%
       select(ID,exo.ra)
-    tmp$Taxa <- data[[taxlev]]
+    tmp$Taxa <- data.long[[taxlev]]
     tmp.wide <- tmp %>%
       group_by(ID,Taxa)%>%
       summarize(ra = sum(exo.ra, na.rm = T))%>%
