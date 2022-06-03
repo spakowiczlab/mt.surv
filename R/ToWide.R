@@ -10,7 +10,7 @@
 #' @examples
 #'
 #'
-exoToDF <- function(data.long,surv.dat,
+ToWide <- function(data.long,surv.dat,
                     taxalevels = c("domain", "kingdom", "phylum", "class",
                                    "order", "family", "genus", "species")){
   exoRAtowide <- function(data.long,surv.dat, taxlev){

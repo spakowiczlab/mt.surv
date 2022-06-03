@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-calarea <- function(taxlev,threshold.mat, alpha = 0.05){
+calculateArea <- function(taxlev,threshold.mat, alpha = 0.05){
   output <- threshold.mat[[taxlev]]%>%
     dplyr::filter(pval < alpha) %>%
     dplyr::mutate(sig.dif = log(alpha) - log(pval),

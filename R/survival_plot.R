@@ -1,15 +1,4 @@
-#' Create survival plot
-#'
-#' @param modified_input an output list from function, containing input data for survival plot.
-#' @param taxlev a character to select a taxonomy level to plot
-#' @param data.type a character specifying where the data comes from and what is the cancer subtype. This
-#' will be added to the title
-#'
-#' @return a survival plot
-#' @export
-#'
-#' @examples
-plot_survival <- function(modified_input, taxlev, data.type){
+survival_plot <- function(modified_input, taxlev, title.input){
 
   surv <- modified_input[[3]]
   tax.mat <- modified_input[[2]]
