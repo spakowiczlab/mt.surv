@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculateArea.R
 \name{calculateArea}
 \alias{calculateArea}
-\title{Calarea}
+\title{Quantifying taxonomy significance with multi-threshold object}
 \usage{
 calculateArea(taxlev, threshold.mat, alpha = 0.05)
 }

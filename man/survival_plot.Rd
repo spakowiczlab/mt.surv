@@ -2,7 +2,7 @@
 % Please edit documentation in R/survival_plot.R
 \name{survival_plot}
 \alias{survival_plot}
-\title{Title}
+\title{Make survival curve}
 \usage{
 survival_plot(modified_input, taxlev, title.input)
 }
@@ -17,5 +17,5 @@ survival_plot(modified_input, taxlev, title.input)
 a ggplot object
 }
 \description{
-Title
+Make survival curve
 }

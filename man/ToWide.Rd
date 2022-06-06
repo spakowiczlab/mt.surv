@@ -2,7 +2,7 @@
 % Please edit documentation in R/ToWide.R
 \name{ToWide}
 \alias{ToWide}
-\title{change data frame into wide format and match survival data}
+\title{Change data frame into wide format and match survival data}
 \usage{
 ToWide(
   data.long,
@@ -22,7 +22,7 @@ ToWide(
 a long format of the taxonomy data with matching survival information
 }
 \description{
-change data frame into wide format and match survival data
+Change data frame into wide format and match survival data
 }
 \examples{
 

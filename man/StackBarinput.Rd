@@ -2,7 +2,7 @@
 % Please edit documentation in R/StackBarinput.R
 \name{StackBarinput}
 \alias{StackBarinput}
-\title{Title}
+\title{Generate input objects for stacked bar plots}
 \usage{
 StackBarinput(TCGA.list, ORIEN.list)
 }
@@ -15,5 +15,5 @@ StackBarinput(TCGA.list, ORIEN.list)
 a dataframe that can be used to make stacked bar plot
 }
 \description{
-Title
+Generate input objects for stacked bar plots
 }

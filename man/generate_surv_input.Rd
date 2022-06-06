@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_surv_input.R
 \name{generate_surv_input}
 \alias{generate_surv_input}
-\title{Title}
+\title{Generate input objects for survival plots}
 \usage{
 generate_surv_input(cancer.subtype, input.list, tresh.list, area, tax_num)
 }
@@ -23,5 +23,5 @@ a list conatining survival data, taxonomy data, threshold data, and selected tax
 The list should be used as an input for plotting survival analysis
 }
 \description{
-Title
+Generate input objects for survival plots
 }
