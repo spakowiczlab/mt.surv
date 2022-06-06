@@ -1,4 +1,4 @@
-#' change data frame into wide format and match survival data
+#' Change data frame into wide format and match survival data
 #'
 #' @param data.long input taxonomy matrix in long format
 #' @param surv.dat survival information for the data.long
@@ -15,14 +15,14 @@ ToWide <- function(data.long,surv.dat,
                                    "order", "family", "genus", "species")){
   exoRAtowide <- function(data.long,surv.dat, taxlev){
     tmp <- data.long %>%
-      select(ID,exo.ra)
+      dplyr::select(ID,exo.ra)
     tmp$Taxa <- data.long[[taxlev]]
     tmp.wide <- tmp %>%
-      group_by(ID,Taxa)%>%
-      summarize(ra = sum(exo.ra, na.rm = T))%>%
-      ungroup()%>%
-      spread(key = "Taxa", value = "ra")%>%
-      filter(ID %in% surv.dat$ID)
+      dplyr::group_by(ID,Taxa)%>%
+      dplyr::summarize(ra = sum(exo.ra, na.rm = T))%>%
+      dplyr::ungroup()%>%
+      tidyr::spread(key = "Taxa", value = "ra")%>%
+      dplyr::filter(ID %in% surv.dat$ID)
     tmp.wide[is.na(tmp.wide)] <- 0
     return(tmp.wide)
   }

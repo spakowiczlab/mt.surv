@@ -1,4 +1,5 @@
-#' Calarea
+#' Quantifying taxonomy significance with multi-threshold object
+#'
 #' @description This function calculate the distence between 0.05 and p-value under 0.05 as an
 #' indicator for area under the curve
 #' @param taxlev a character object specifying which subject survival analysis

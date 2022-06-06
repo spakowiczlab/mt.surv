@@ -5,15 +5,14 @@
 
 ## Overview
 
-This package contains functions to apply multi-threshold survival analysis on microbiome data, using (1) survival information and (2) microbe reads
+This package contains functions to apply multi-threshold survival analysis on microbiome data, using (1) survival information and (2) microbial reads
 
 `survivalByQuantile` generates a table with cox analysis parameters at various threshold quantile
 
-`calarea` quantify how sensitive a taxonomy level is to threshold quantile
+`calculateArea` quantify how sensitive a taxonomy level is to threshold quantile
 
-`exoToDF` convert the microbe reads from long format to wide format
+`ToWide` convert the microbe reads from long format to wide format
 
-`make_threshold` take the output from survivalByQuantile() and visulize it
 
 ## Installation
 

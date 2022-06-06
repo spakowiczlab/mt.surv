@@ -11,39 +11,39 @@
 butterfly_input <- function(area.input, subtype, num_micro) {
 
   data_T <- area.input %>%
-    filter(grepl("T", type),
+    dplyr::filter(grepl("T", type),
            grepl(subtype, type))%>%
-    select(-type)
+    dplyr::select(-type)
   data_O <- area.input %>%
-    filter(grepl("O", type),
+    dplyr::filter(grepl("O", type),
            grepl(subtype, type))%>%
-    mutate(area = -1*area)%>%
-    select(-type)
+    dplyr::mutate(area = -1*area)%>%
+    dplyr::select(-type)
 
   common.tax <- intersect(data_T$species,data_O$species)
 
   common.area.all <- data_T %>%
-    filter(species %in% common.tax)%>%
-    rename("T.area" = "area")%>%
-    inner_join(data_O, by = "species")%>%
-    rename("Taxa" = "species", "O.area" = "area")%>%
-    mutate(sum.area = T.area + abs(O.area))%>%
-    arrange(sum.area)%>%
-    mutate(Taxa=factor(Taxa, levels=Taxa))%>%
-    gather("type","area",-c("Taxa","sum.area"))
+    dplyr::filter(species %in% common.tax)%>%
+    dplyr::rename("T.area" = "area")%>%
+    dplyr::inner_join(data_O, by = "species")%>%
+    dplyr::rename("Taxa" = "species", "O.area" = "area")%>%
+    dplyr::mutate(sum.area = T.area + abs(O.area))%>%
+    dplyr::arrange(sum.area)%>%
+    dplyr::mutate(Taxa=factor(Taxa, levels=Taxa))%>%
+    tidyr::gather("type","area",-c("Taxa","sum.area"))
 
 
   common.area.head <- data_T %>%
-    rename("T.area" = "area")%>%
-    filter(species %in% common.tax)%>%
-    inner_join(data_O, by = "species")%>%
-    rename("Taxa" = "species", "O.area" = "area")%>%
-    mutate(O.area = O.area*-1,
+    dplyr::rename("T.area" = "area")%>%
+    dplyr::filter(species %in% common.tax)%>%
+    dplyr::inner_join(data_O, by = "species")%>%
+    dplyr::rename("Taxa" = "species", "O.area" = "area")%>%
+    dplyr::mutate(O.area = O.area*-1,
            sum.area = T.area + abs(O.area))%>%
-    arrange(sum.area)%>%
+    dplyr::arrange(sum.area)%>%
     tail(n = num_micro)%>%
-    mutate(Taxa=factor(Taxa, levels=Taxa))%>%
-    gather("type","area",-c("Taxa","sum.area"))
+    dplyr::mutate(Taxa=factor(Taxa, levels=Taxa))%>%
+    tidyr::gather("type","area",-c("Taxa","sum.area"))
 
 
   common.taxarea.head <- ggplot(common.area.head, aes(x = area, y = Taxa ,fill = type))+

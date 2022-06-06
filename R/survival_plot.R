@@ -1,4 +1,4 @@
-#' Title
+#' Make survival curve
 #'
 #' @param modified_input the output list from 'generate_surv_input' function
 #' @param taxlev an output string object from 'generate_surv_input' specifying a taxonomy level to be plotted

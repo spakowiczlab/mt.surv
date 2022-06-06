@@ -1,4 +1,4 @@
-#' Title
+#' Generate input objects for survival plots
 #'
 #' @param cancer.subtype a character used to select data from input list, tresh.list, area
 #' @param input.list a list containing survival and taxonomy information
@@ -23,17 +23,17 @@ generate_surv_input <- function(cancer.subtype, input.list, tresh.list, area, ta
   tax.list <- exoToDF(tax,surv)
 
   tax.mat <- purrr::reduce(tax.list, function(x,y) left_join(x,y))%>%
-    arrange(ID)
+    dplyr::arrange(ID)
 
   tresh <- tresh.list[[paste(data_from,"_tresh_",subgroup,".RData", sep = "")]]
 
 
   tax_out <- area %>%
-    filter(grepl(data_from, type),
+    dplyr::filter(grepl(data_from, type),
            grepl(subgroup, type),
            !grepl("unclassified", species))%>%
-    select(species)%>%
-    slice_head(n=tax_num)
+    dplyr::select(species)%>%
+    dplyr::slice_head(n=tax_num)
 
   select_tax <- tax_out$species
 

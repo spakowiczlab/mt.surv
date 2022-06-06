@@ -27,14 +27,14 @@ survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq
     survtemp <- survival::coxph(survival::Surv(days, vitalstatus) ~ tmp, surv.dat)
     dat_temp <- merge(data.frame(summary(survtemp)[["conf.int"]]),
                       data.frame(summary(survtemp)[["coefficients"]])) %>%
-      mutate(hazard.ratio = exp..coef.,
+      dplyr::mutate(hazard.ratio = exp..coef.,
              low.bound = lower..95,
              upper.bound = upper..95,
              pval = Pr...z..,
              percentile = percent,
              cutoff.value = cut) %>%
-      select(hazard.ratio, low.bound, upper.bound, percentile, cutoff.value, pval) %>%
-      mutate(hazard.direction = ifelse(hazard.ratio >= 1, ">=1", "<1"))
+      dplyr::select(hazard.ratio, low.bound, upper.bound, percentile, cutoff.value, pval) %>%
+      dplyr::mutate(hazard.direction = ifelse(hazard.ratio >= 1, ">=1", "<1"))
 
     return(dat_temp)
   }
