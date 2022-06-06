@@ -1,4 +1,15 @@
+#' Title
+#'
+#' @param modified_input the output list from 'generate_surv_input' function
+#' @param taxlev an output string object from 'generate_surv_input' specifying a taxonomy level to be plotted
+#' @param title.input a string object to speficy the title of the plot
+#'
+#' @return a ggplot object
+#' @export
+#'
+#' @examples
 survival_plot <- function(modified_input, taxlev, title.input){
+
 
   surv <- modified_input[[3]]
   tax.mat <- modified_input[[2]]
