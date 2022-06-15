@@ -1,6 +1,8 @@
 # mt.surv <img src="man/figures/mt.surv_logo.png" align="right" width="100" />
 
-## Multi-threshold survival analysis [![DOI](https://zenodo.org/badge/476856711.svg)](https://zenodo.org/badge/latestdoi/476856711, align="right")    
+## Multi-threshold survival analysis 
+
+[![DOI](https://zenodo.org/badge/476856711.svg)](https://zenodo.org/badge/latestdoi/476856711)    
 
 
 ## Overview
