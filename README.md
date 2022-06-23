@@ -1,4 +1,4 @@
-# mt.surv <img src="man/figures/mt.surv_logo.png" align="right" width="100" />
+# mt.surv <img src="man/figures/mt.surv_logo2.png" align="right" width="100" />
 
 ## Multi-threshold survival analysis 
 
