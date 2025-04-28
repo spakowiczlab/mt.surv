@@ -17,30 +17,42 @@
 #' @export
 #'
 #' @examples
-survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq(.01,.99,0.01)){
+survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq(.01, .99, 0.01)) {
 
-  aa <- function(input.var, input.tax,surv.dat, percent){
+  aa <- function(input.var, input.tax, surv.dat, percent) {
     surv.dat$input.var <- input.tax[[input.var]]
     cut <- quantile(surv.dat$input.var, percent)
-    surv.dat$tmp <- ifelse(surv.dat$input.var < cut, 0, 1)
-    ### survival data and Tax data ID has to be the same and in same order (use arrange())
-    survtemp <- survival::coxph(survival::Surv(days, vitalstatus) ~ tmp, surv.dat)
-    dat_temp <- merge(data.frame(summary(survtemp)[["conf.int"]]),
-                      data.frame(summary(survtemp)[["coefficients"]])) %>%
-      dplyr::mutate(hazard.ratio = exp..coef.,
-             low.bound = lower..95,
-             upper.bound = upper..95,
-             pval = Pr...z..,
-             percentile = percent,
-             cutoff.value = cut) %>%
-      dplyr::select(hazard.ratio, low.bound, upper.bound, percentile, cutoff.value, pval) %>%
-      dplyr::mutate(hazard.direction = ifelse(hazard.ratio >= 1, ">=1", "<1"))
+
+    surv.dat$tmp <- case_when(surv.dat$input.var <= cut ~ 0,
+                              surv.dat$input.var > cut ~ 1)
+    surv.dat$tmp <- factor(surv.dat$tmp)
+    surv.dat$tmp <- forcats::fct_relevel(surv.dat$tmp, "0")
+
+    surv_model <- survival::coxph(survival::Surv(days, vitalstatus) ~ tmp, surv.dat)
+
+    tidy_out <- broom::tidy(surv_model, exponentiate = TRUE, conf.int = TRUE)
+
+    dat_temp <- tidy_out %>%
+      dplyr::filter(term == "tmp1") %>%  # keep the comparison group (vs. reference "0")
+      dplyr::mutate(
+        percentile = percent,
+        cutoff.value = cut,
+        hazard.direction = ifelse(estimate >= 1, ">=1", "<1")
+      ) %>%
+      dplyr::select(
+        hazard.ratio = estimate,
+        low.bound = conf.low,
+        upper.bound = conf.high,
+        percentile,
+        cutoff.value,
+        pval = p.value,
+        hazard.direction
+      )
 
     return(dat_temp)
   }
 
-  ptable <- lapply(percentiles, function(x) aa(input.var, input.tax,surv.dat,x))
-  ptable.df <- bind_rows(ptable)
-
-  return(ptable.df)
+  # Run over all percentiles
+  results <- purrr::map_dfr(percentiles, ~aa(input.var, input.tax, surv.dat, .x))
+  return(results)
 }
