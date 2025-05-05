@@ -7,6 +7,10 @@ Authors@R:
             family = "Hoyd",
             role = c("aut"),
            comment = c(ORCID = "0000-0003-1210-4491")),
+           person(given = "Alexander", 
+            family = "Loncar",
+            role = c("aut"),
+           comment = c(ORCID = "0009-0000-8079-2092")),
     person(given = "YunZhou",
            family = "Liu",
            role = c("aut"),
@@ -20,7 +24,7 @@ Authors@R:
            email = "daniel.spakowicz@osumc.edu",
            comment = c(ORCID = "0000-0003-2314-6435"))
      )
-Maintainer: Daniel Spakowicz <daniel.spakowicz@osumc.edu>
+Maintainer: Alexander Loncar <alexander.loncar@osumc.edu>
 Description: This package can perfrom survival analysis on various threshold which split the dataset into two groups. Some formatting needs to be done before using. 
 License: MIT + file LICENSE
 Encoding: UTF-8
