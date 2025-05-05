@@ -16,15 +16,15 @@
 #' frame can then be manipulated for various plots
 #' @export
 #'
-#' @examples
+
 survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq(.01, .99, 0.01)) {
 
   aa <- function(input.var, input.tax, surv.dat, percent) {
     surv.dat$input.var <- input.tax[[input.var]]
     cut <- quantile(surv.dat$input.var, percent)
 
-    surv.dat$tmp <- case_when(surv.dat$input.var <= cut ~ 0,
-                              surv.dat$input.var > cut ~ 1)
+    surv.dat$tmp <- dplyr::case_when(surv.dat$input.var < cut ~ 0,
+                              surv.dat$input.var >= cut ~ 1)
     surv.dat$tmp <- factor(surv.dat$tmp)
     surv.dat$tmp <- forcats::fct_relevel(surv.dat$tmp, "0")
 

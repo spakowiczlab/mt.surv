@@ -8,7 +8,6 @@
 #' @return a R script and a sl script which can then be submitted as a job
 #' @export
 #'
-#' @examples
 emp <- function(type,path,taxo.num, loop.num){
   fileOut<-file(file.path(path,"empirical.sl"))
   fileOutr <- file(file.path(path,"empirical.R"))

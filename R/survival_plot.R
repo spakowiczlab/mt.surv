@@ -7,7 +7,6 @@
 #' @return a ggplot object
 #' @export
 #'
-#' @examples
 survival_plot <- function(modified_input, taxlev, title.input){
 
 
@@ -27,9 +26,9 @@ survival_plot <- function(modified_input, taxlev, title.input){
   tmp <- gsub("[a-z]__(.*)","\\1",taxlev)
 
   surv <- surv %>%
-    mutate(group = ifelse(Taxa < cut, "< threshold", "> threshold"))
+    dplyr::mutate(group = ifelse(Taxa < cut, "< threshold", "> threshold"))
 
-  temp <- survfit(Surv(days, vitalstatus) ~ group, surv)
+  temp <- survival::survfit(Surv(days, vitalstatus) ~ group, surv)
 
   p.temp <- ggsurvplot(temp,
                        data = surv,

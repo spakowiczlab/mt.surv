@@ -6,7 +6,7 @@
 #' @return a dataframe that can be used to make stacked bar plot
 #' @export
 #'
-#' @examples
+
 StackBarinput <- function(TCGA.list, ORIEN.list){
   T_tax <- TCGA.list[[1]]%>%
     dplyr::select(ID,grep("p__", colnames(.)),-grep("k__", colnames(.)))%>%

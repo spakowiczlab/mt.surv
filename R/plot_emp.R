@@ -6,7 +6,7 @@
 #' @return a ggplot2 object and a dataframe
 #' @export
 #'
-#' @examples
+
 plot_emp <- function(list, plot.title){
   level_order <- c("original",as.character(seq(2,length(list[[1]]$seeds),1)))
   b <- do.call(rbind,list)%>%

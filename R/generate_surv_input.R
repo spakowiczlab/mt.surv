@@ -11,7 +11,6 @@
 #' The list should be used as an input for plotting survival analysis
 #' @export
 #'
-#' @examples
 generate_surv_input <- function(cancer.subtype, input.list, tresh.list, area, tax_num){
 
   data_from <- substr(names(input.list)[[1]],1,1)

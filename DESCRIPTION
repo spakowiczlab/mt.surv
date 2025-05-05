@@ -25,13 +25,17 @@ Description: This package can perfrom survival analysis on various threshold whi
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.3.2
 Suggests: 
     testthat,
     knitr,
     rmarkdown
 Imports: 
     dplyr,
-    survival
+    survival,
+    broom,
+    forcats,
+    purrr,
+    tidyr
 VignetteBuilder: knitr
 Date: 2022-04-08

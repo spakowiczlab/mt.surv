@@ -11,7 +11,6 @@
 #' @return a numeric value representing area for each taxlev is stored in a dataframe
 #' @export
 #'
-#' @examples
 calculateArea <- function(taxlev,threshold.mat, alpha = 0.05){
   output <- threshold.mat[[taxlev]]%>%
     dplyr::filter(pval < alpha) %>%

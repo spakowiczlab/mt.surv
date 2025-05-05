@@ -7,7 +7,6 @@
 #' @return a list with two ggplot2 objects. One for all taxonomy level and another for selected number speficied in 'num_micro'
 #' @export
 #'
-#' @examples
 butterfly_input <- function(area.input, subtype, num_micro) {
 
   data_T <- area.input %>%

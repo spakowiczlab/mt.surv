@@ -7,9 +7,7 @@
 #' @return a long format of the taxonomy data with matching survival information
 #' @export
 #'
-#' @examples
-#'
-#'
+
 ToWide <- function(data.long,surv.dat,
                     taxalevels = c("domain", "kingdom", "phylum", "class",
                                    "order", "family", "genus", "species")){

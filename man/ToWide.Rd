@@ -24,7 +24,3 @@ a long format of the taxonomy data with matching survival information
 \description{
 Change data frame into wide format and match survival data
 }
-\examples{
-
-
-}
