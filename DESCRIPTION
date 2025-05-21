@@ -32,7 +32,6 @@ LazyData: true
 RoxygenNote: 7.3.2
 Suggests: 
     testthat,
-    knitr,
     rmarkdown
 Imports: 
     dplyr,
@@ -40,6 +39,7 @@ Imports:
     broom,
     forcats,
     purrr,
-    tidyr
-VignetteBuilder: knitr
-Date: 2022-04-08
+    tidyr,
+    ggplot2,
+    magrittr,
+Date: 2025-05-20

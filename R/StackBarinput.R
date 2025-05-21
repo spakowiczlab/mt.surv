@@ -4,8 +4,8 @@
 #' @param ORIEN.list a list object containing survival and taxonomy information for ORIEN
 #'
 #' @return a dataframe that can be used to make stacked bar plot
+#' @importFrom magrittr %>%
 #' @export
-#'
 
 StackBarinput <- function(TCGA.list, ORIEN.list){
   T_tax <- TCGA.list[[1]]%>%

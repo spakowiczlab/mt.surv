@@ -5,6 +5,13 @@
 #' @param num_micro an integer indicating how many microbes shoul be included for zoomed up version
 #'
 #' @return a list with two ggplot2 objects. One for all taxonomy level and another for selected number speficied in 'num_micro'
+#' @importFrom magrittr %>%
+#' @importFrom dplyr mutate group_by summarise filter left_join
+#' @importFrom ggplot2 ggplot aes geom_col geom_text geom_vline geom_histogram
+#' @importFrom ggplot2 geom_density facet_wrap theme element_text element_blank
+#' @importFrom ggplot2 theme_classic scale_x_continuous scale_y_continuous ggtitle xlab ylab
+#' @importFrom stats pnorm quantile sd ave
+#' @importFrom utils tail
 #' @export
 #'
 butterfly_input <- function(area.input, subtype, num_micro) {
