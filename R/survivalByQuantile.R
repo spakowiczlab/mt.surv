@@ -23,8 +23,16 @@ survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq
     surv.dat$input.var <- input.tax[[input.var]]
     cut <- quantile(surv.dat$input.var, percent)
 
-    surv.dat$tmp <- dplyr::case_when(surv.dat$input.var < cut ~ 0,
-                              surv.dat$input.var >= cut ~ 1)
+    surv.dat$tmp <- dplyr::case_when(
+      surv.dat$input.var < cut ~ 0,
+      surv.dat$input.var >= cut ~ 1
+    )
+
+    # skip this percentile if the split produces only one group
+    if (length(unique(surv.dat$tmp)) < 2) {
+      return(NULL)
+    }
+
     surv.dat$tmp <- factor(surv.dat$tmp)
     surv.dat$tmp <- forcats::fct_relevel(surv.dat$tmp, "0")
 
@@ -33,7 +41,7 @@ survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq
     tidy_out <- broom::tidy(surv_model, exponentiate = TRUE, conf.int = TRUE)
 
     dat_temp <- tidy_out %>%
-      dplyr::filter(term == "tmp1") %>%  # keep the comparison group (vs. reference "0")
+      dplyr::filter(term == "tmp1") %>%
       dplyr::mutate(
         percentile = percent,
         cutoff.value = cut,
@@ -52,7 +60,9 @@ survivalByQuantile <- function(input.var, input.tax, surv.dat, percentiles = seq
     return(dat_temp)
   }
 
-  # Run over all percentiles
-  results <- purrr::map_dfr(percentiles, ~aa(input.var, input.tax, surv.dat, .x))
+  results_list <- purrr::map(percentiles, ~aa(input.var, input.tax, surv.dat, .x))
+  results_list <- purrr::compact(results_list)
+  results <- dplyr::bind_rows(results_list)
+
   return(results)
 }
