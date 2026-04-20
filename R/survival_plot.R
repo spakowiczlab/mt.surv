@@ -3,8 +3,54 @@
 #' @param modified_input the output list from 'generate_surv_input' function
 #' @param taxlev an output string object from 'generate_surv_input' specifying a taxonomy level to be plotted
 #' @param title.input a string object to speficy the title of the plot
-#'
 #' @return a ggplot object
+#' @examples
+#' ## Example requires survival and survminer
+#' set.seed(123)
+#'
+#' ## Simulated survival data
+#' surv_df <- data.frame(
+#'   days = runif(60, min = 100, max = 4000),
+#'   vitalstatus = sample(c(0, 1), 60, replace = TRUE)
+#' )
+#'
+#' ## Simulated taxonomic matrix (one column per taxonomic level)
+#' tax_mat <- data.frame(
+#'   "k__Bacteria" = rlnorm(60, meanlog = -2, sdlog = 0.5),
+#'   "p__Firmicutes" = rlnorm(60, meanlog = -1.8, sdlog = 0.6)
+#' )
+#'
+#' ## Simulated threshold table for each taxonomic level
+#' thresh_k <- data.frame(
+#'   percentile = c(0.25, 0.50, 0.75),
+#'   pval = c(0.01, 0.05, 0.10)
+#' )
+#'
+#' thresh_p <- data.frame(
+#'   percentile = c(0.30, 0.60, 0.90),
+#'   pval = c(0.02, 0.04, 0.08)
+#' )
+#'
+#' ## Assemble modified_input list
+#' modified_input <- list(
+#'   tresh = list(
+#'     "k__Bacteria" = thresh_k,
+#'     "p__Firmicutes" = thresh_p
+#'   ),
+#'   tax.mat = tax_mat,
+#'   surv = surv_df
+#' )
+#'
+#' ## Run survival plot
+#' p <- survival_plot(
+#'   modified_input = modified_input,
+#'   taxlev = "k__Bacteria",
+#'   title.input = "Example Cohort"
+#' )
+#'
+#' ## View plot
+#' p
+#'
 #' @export
 #'
 survival_plot <- function(modified_input, taxlev, title.input){
@@ -30,7 +76,7 @@ survival_plot <- function(modified_input, taxlev, title.input){
 
   temp <- survival::survfit(Surv(days, vitalstatus) ~ group, surv)
 
-  p.temp <- ggsurvplot(temp,
+  p.temp <- survminer::ggsurvplot(temp,
                        data = surv,
                        pval = TRUE,
                        title = paste(tmp," (",title.input,")",sep = ""),

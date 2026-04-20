@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculateArea.R
 \name{calculateArea}
 \alias{calculateArea}
-\title{Quantifying taxonomy significance with multi-threshold object}
+\title{Quantify taxonomy significance using multi-threshold results}
 \usage{
 calculateArea(taxlev, threshold.mat, alpha = 0.05)
 }
@@ -16,9 +16,33 @@ survival under various threshold}
 \item{alpha}{a numeric value representing the statistically significant p-value}
 }
 \value{
-a numeric value representing area for each taxlev is stored in a dataframe
+A data frame containing the calculated area values for the specified taxonomy level.
 }
 \description{
-This function calculate the distence between 0.05 and p-value under 0.05 as an
-indicator for area under the curve
+This function calculates the distance between alpha (default 0.05) and
+p-values below the significance threshold as an indicator of area under
+the curve.
+}
+\examples{
+# Create mock threshold matrix for two taxonomy levels
+threshold.mat <- list(
+  Phylum = data.frame(
+    pval             = c(0.01, 0.04, 0.10, 0.02, 0.50),
+    hazard.direction = c("<1", "<1", ">1", ">1", "<1")
+  ),
+  Family = data.frame(
+    pval             = c(0.03, 0.20, 0.001, 0.04, 0.08),
+    hazard.direction = c(">1", "<1",  "<1",  ">1", ">1")
+  )
+)
+
+# Calculate area for Phylum level at default alpha = 0.05
+result <- calculateArea(taxlev = "Phylum", threshold.mat = threshold.mat)
+
+# Calculate area for Family level with stricter alpha
+result_strict <- calculateArea(
+  taxlev    = "Family",
+  threshold.mat = threshold.mat,
+  alpha     = 0.01
+)
 }

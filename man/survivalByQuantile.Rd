@@ -35,3 +35,29 @@ Compute cox model p-value under various threshold
 \details{
 The threshold used in this function is to categorize data into two groups
 }
+\examples{
+set.seed(123)
+
+## Simulated survival data
+surv.dat <- data.frame(
+  ID = paste0("S", 1:50),
+  days = runif(50, 100, 3000),
+  vitalstatus = sample(c(0, 1), 50, replace = TRUE)
+)
+
+## Simulated taxonomic abundance matrix
+input.tax <- data.frame(
+  genus_A = rlnorm(50, meanlog = -2, sdlog = 0.5),
+  genus_B = rlnorm(50, meanlog = -1.5, sdlog = 0.6)
+)
+
+## Compute hazard ratios across quantiles
+res <- survivalByQuantile(
+  input.var = "genus_A",
+  input.tax = input.tax,
+  surv.dat  = surv.dat,
+  percentiles = seq(0.2, 0.8, 0.2)
+)
+
+res
+}

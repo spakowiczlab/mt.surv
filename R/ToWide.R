@@ -3,8 +3,41 @@
 #' @param data.long input taxonomy matrix in long format
 #' @param surv.dat survival information for the data.long
 #' @param taxalevels character vector representing every taxonomy level to be changed into wide format
-#'
 #' @return a long format of the taxonomy data with matching survival information
+#' @examples
+#' ## Reproducible example
+#' set.seed(123)
+#'
+#' ## Simulated long-format exogenous relative abundance data
+#' data.long <- data.frame(
+#'   ID = rep(paste0("S", 1:10), each = 4),
+#'   exo.ra = runif(40),
+#'   domain  = rep("d__Bacteria", 40),
+#'   kingdom = rep("k__Bacteria", 40),
+#'   phylum  = rep(c("p__Firmicutes", "p__Proteobacteria"), each = 20),
+#'   class   = rep(c("c__Bacilli", "c__Gammaproteobacteria"), each = 20),
+#'   order   = rep("o__TestOrder", 40),
+#'   family  = rep("f__TestFamily", 40),
+#'   genus   = rep(c("g__A", "g__B"), times = 20),
+#'   species = rep(c("s__A1", "s__B1"), times = 20)
+#' )
+#'
+#' ## Simulated survival metadata
+#' surv.dat <- data.frame(
+#'   ID = paste0("S", 1:10),
+#'   days = runif(10, 500, 3000),
+#'   vitalstatus = sample(c(0, 1), 10, replace = TRUE)
+#' )
+#'
+#' ## Convert to wide format across taxonomic levels
+#' wide_list <- ToWide(
+#'   data.long = data.long,
+#'   surv.dat  = surv.dat
+#' )
+#'
+#' ## Inspect output
+#' names(wide_list)
+#' wide_list$phylum
 #' @export
 #'
 

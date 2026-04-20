@@ -5,13 +5,35 @@
 #' @param num_micro an integer indicating how many microbes shoul be included for zoomed up version
 #'
 #' @return a list with two ggplot2 objects. One for all taxonomy level and another for selected number speficied in 'num_micro'
-#' @importFrom magrittr %>%
 #' @importFrom dplyr mutate group_by summarise filter left_join
 #' @importFrom ggplot2 ggplot aes geom_col geom_text geom_vline geom_histogram
 #' @importFrom ggplot2 geom_density facet_wrap theme element_text element_blank
 #' @importFrom ggplot2 theme_classic scale_x_continuous scale_y_continuous ggtitle xlab ylab
 #' @importFrom stats pnorm quantile sd ave
 #' @importFrom utils tail
+#' @examples
+#' # Create mock area input data
+#' area.input <- data.frame(
+#'   type    = c("T_DDLPS", "T_DDLPS", "T_DDLPS",
+#'               "T_LMS",   "T_LMS",
+#'               "O_DDLPS", "O_DDLPS", "O_DDLPS",
+#'               "O_LMS",   "O_LMS"),
+#'   species = c("Proteobacteria", "Firmicutes", "Bacteroidetes",
+#'               "Proteobacteria", "Firmicutes",
+#'               "Proteobacteria", "Firmicutes", "Bacteroidetes",
+#'               "Proteobacteria", "Firmicutes"),
+#'   area    = c(0.45, 0.30, 0.25,
+#'               0.60, 0.40,
+#'               0.35, 0.40, 0.25,
+#'               0.50, 0.50)
+#' )
+#'
+#' # Run for DDLPS subtype, showing top 3 microbes
+#' result <- butterfly_input(area.input, subtype = "DDLPS", num_micro = 3)
+#'
+#' # Result is a list with two ggplot objects
+#' # result$common.taxarea.all   - stacked bar chart of all shared taxa
+#' # result$common.taxarea.head  - dodged bar chart of top num_micro taxa
 #' @export
 #'
 butterfly_input <- function(area.input, subtype, num_micro) {

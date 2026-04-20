@@ -10,10 +10,34 @@
 #' order must agree with input.dat's sample order
 #' @param percentiles a list of numeric values specifying all of the percentiles
 #' to be tested on
-#'
 #' @return The function will generate a data frame containing hazard ratio,
 #' lower bound, upper bound, percentile, cutoff threshold, and p-value. This data
 #' frame can then be manipulated for various plots
+#' @examples
+#' set.seed(123)
+#'
+#' ## Simulated survival data
+#' surv.dat <- data.frame(
+#'   ID = paste0("S", 1:50),
+#'   days = runif(50, 100, 3000),
+#'   vitalstatus = sample(c(0, 1), 50, replace = TRUE)
+#' )
+#'
+#' ## Simulated taxonomic abundance matrix
+#' input.tax <- data.frame(
+#'   genus_A = rlnorm(50, meanlog = -2, sdlog = 0.5),
+#'   genus_B = rlnorm(50, meanlog = -1.5, sdlog = 0.6)
+#' )
+#'
+#' ## Compute hazard ratios across quantiles
+#' res <- survivalByQuantile(
+#'   input.var = "genus_A",
+#'   input.tax = input.tax,
+#'   surv.dat  = surv.dat,
+#'   percentiles = seq(0.2, 0.8, 0.2)
+#' )
+#'
+#' res
 #' @export
 #'
 

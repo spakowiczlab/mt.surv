@@ -4,9 +4,8 @@
 #' @param path a character object specifying where the scripts and RDS will be save to. Don't add "/" at the end
 #' @param taxo.num an integer to select how many taxonomy to be tested on
 #' @param loop.num an integer to set number of cycles for bootstrapping
-#'
 #' @return a R script and a sl script which can then be submitted as a job
-#' @export
+#' @noRd
 #'
 emp <- function(type,path,taxo.num, loop.num){
   fileOut<-file(file.path(path,"empirical.sl"))

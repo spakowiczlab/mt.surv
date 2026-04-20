@@ -5,5 +5,5 @@ utils::globalVariables(c(
   "hazard.direction", "survival.effect", "sig.dif", "subgroup", "seeds",
   "o.area", "ave", "sd", "..density..", "term", "estimate", "conf.low",
   "conf.high", "percentile", "cutoff.value", "p.value", "ra", "sum.ra",
-  "exoToDF", "ggsurvplot"
+  "exoToDF", "ggsurvplot", "after_stat", "density", "PrimaryMet"
 ))

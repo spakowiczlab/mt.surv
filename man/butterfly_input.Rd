@@ -19,3 +19,27 @@ a list with two ggplot2 objects. One for all taxonomy level and another for sele
 \description{
 Generate input for butterfly plot
 }
+\examples{
+# Create mock area input data
+area.input <- data.frame(
+  type    = c("T_DDLPS", "T_DDLPS", "T_DDLPS",
+              "T_LMS",   "T_LMS",
+              "O_DDLPS", "O_DDLPS", "O_DDLPS",
+              "O_LMS",   "O_LMS"),
+  species = c("Proteobacteria", "Firmicutes", "Bacteroidetes",
+              "Proteobacteria", "Firmicutes",
+              "Proteobacteria", "Firmicutes", "Bacteroidetes",
+              "Proteobacteria", "Firmicutes"),
+  area    = c(0.45, 0.30, 0.25,
+              0.60, 0.40,
+              0.35, 0.40, 0.25,
+              0.50, 0.50)
+)
+
+# Run for DDLPS subtype, showing top 3 microbes
+result <- butterfly_input(area.input, subtype = "DDLPS", num_micro = 3)
+
+# Result is a list with two ggplot objects
+# result$common.taxarea.all   - stacked bar chart of all shared taxa
+# result$common.taxarea.head  - dodged bar chart of top num_micro taxa
+}
